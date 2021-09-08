@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
-import './index.less'
 export default class index extends Component {
   render() {
     return (
-      <div>
-        login
+      <div className="change">
       </div>
     )
   }
