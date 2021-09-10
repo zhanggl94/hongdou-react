@@ -1,12 +1,16 @@
-import React from 'react'
-import { BrowserRouter as Router } from 'react-router-dom'
+import Signin from '../pages/Signin'
+import Home from '../pages/Home'
 
-export default function index() {
-  return (
-    <div>
-      <Router>
-        
-      </Router>
-    </div>
-  )
-}
+const config = [
+  {
+    path: '/signin',
+    component: Signin,
+    extra: true,
+  },
+  {
+    path: '/',
+    component: Home,
+    extra: true,
+  }
+]
+export default config
