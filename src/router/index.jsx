@@ -1,7 +1,7 @@
 import Signin from '../pages/Signin'
 import Home from '../pages/Home'
 
-const config = [
+export const routes = [
   {
     path: '/signin',
     component: Signin,
@@ -11,6 +11,10 @@ const config = [
     path: '/',
     component: Home,
     extra: true,
+  },
+  {
+    path: '/home',
+    component: Home,
+    extra: true,
   }
-]
-export default config
+];
