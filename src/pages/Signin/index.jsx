@@ -3,6 +3,7 @@ import { Button, Form, Input } from 'antd'
 import { userSign } from '../../api/user'
 import './index.less'
 import { Response } from '../../model/Response'
+import { setJWTToken } from '../../util/utils'
 
 const layout = {
   labelCol: 8,
@@ -12,10 +13,10 @@ const layout = {
 const onFinish = async (values) => {
   try {
     try {
-      // const response = new Response(await userSign(values));
-      const response = await userSign(values);
+      const response = new Response(await userSign(values));
       console.log('response', response)
-      if (response.code) {
+      if (response?.data?.code && response?.data?.jwtToken) {
+        setJWTToken(response.data.jwtToken)
       } else {
 
       }
