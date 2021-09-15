@@ -4,11 +4,11 @@ import { routes } from './router';
 
 function App() {
   return (
-    <Router>
-      <Switch>
-        {renderRoutes(routes)}
-      </Switch>
-    </Router>
+      <Router>
+        <Switch>
+          {renderRoutes(routes)}
+        </Switch>
+      </Router>
   )
 }
 

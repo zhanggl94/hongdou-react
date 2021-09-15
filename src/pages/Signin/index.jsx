@@ -1,13 +1,31 @@
 import React from 'react'
 import { Button, Form, Input } from 'antd'
+import { userSign } from '../../api/user'
 import './index.less'
+import { Response } from '../../model/Response'
 
 const layout = {
   labelCol: 8,
   wrapperCol: 10
 }
 
-const onFinish = (values) => {
+const onFinish = async (values) => {
+  try {
+    try {
+      // const response = new Response(await userSign(values));
+      const response = await userSign(values);
+      console.log('response', response)
+      if (response.code) {
+      } else {
+
+      }
+    } catch (error) {
+      console.log('error', error)
+    }
+    // const result = new Response()
+  } catch (error) {
+
+  }
   console.log('values: ', values)
 }
 
