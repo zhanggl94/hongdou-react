@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { Button, Form, Input } from 'antd'
 import GitHubLink from '../../components/GitHubLink'
 import { userSign } from '../../api/user'
@@ -13,7 +13,7 @@ const layout = {
 }
 
 
-const Signin = () => {
+const Signup = () => {
   const history = useHistory();
 
   const onFinish = async (values) => {
@@ -46,15 +46,15 @@ const Signin = () => {
           <Form.Item name="password" label="密码" rules={[{ required: true, message: '请输入密码' }]}>
             <Input type="password" />
           </Form.Item>
+          <Form.Item name="repassword" label="确认密码" rules={[{ required: true, message: '请确认密码' }]}>
+            <Input type="password" />
+          </Form.Item>
           <Form.Item wrapperCol={{ offset: layout.labelCol, span: layout.labelCol }}>
-            <Button htmlType="submit" type="primary">登录</Button>
+            <Button htmlType="submit" type="primary">注册</Button>
           </Form.Item>
         </Form>
-        <div className="sign-body-message">
-          没有账户？ <Link to="/signup">先去注册</Link>
-        </div>
       </div>
     </div>
   )
 }
-export default Signin;
+export default Signup;

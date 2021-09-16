@@ -1,4 +1,3 @@
-import ErrorBoundary from 'antd/lib/alert/ErrorBoundary';
 import axios from 'axios'
 import { Spin } from 'antd'
 import ReactDOM from 'react-dom'
