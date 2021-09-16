@@ -1,13 +1,8 @@
-import Cookies from 'universal-cookie'
-const jwtToken = 'jwtToken'
+// 设置 LocalStorage
+export const setLocalStorageItem = (k,v) => localStorage.setItem(k, v);
 
-const cookies = new Cookies();
+// 获取 LocalStorage
+export const getLocalStorageItem = (k) => localStorage.getItem(k);
 
-// 设置JWT Token
-export const setJWTToken = value => cookies.set(jwtToken, value)
-
-// 获取JWT Token
-export const getJWTToken = value => cookies.get(jwtToken)
-
-// 删除JWT Token
-export const removeJWTToken = () => cookies.remove(jwtToken)
+// 删除 LocalStorage
+export const removeLocalStorageItem = (k) => localStorage.removeItem(k);

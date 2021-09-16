@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import { Button, Form, Input } from 'antd'
+import { connect } from 'react-redux'
+import { Button, Form, Input, message } from 'antd'
 import GitHubLink from '../../components/GitHubLink'
 import { userSign } from '../../api/user'
 import './index.less'
@@ -12,19 +13,17 @@ const layout = {
   wrapperCol: 10
 }
 
-
-const Signin = () => {
+const Signin = ({}) => {
   const history = useHistory();
-
   const onFinish = async (values) => {
     try {
       const response = new Response(await userSign(values));
-      console.log('response', response)
       if (response?.data?.code && response?.data?.jwtToken) {
         setJWTToken(response.data.jwtToken)
         history.push('/')
+        message.success('登录成功')
       } else {
-
+        message.warning(response.data.message)
       }
     } catch (error) {
       console.log('error', error)
@@ -57,4 +56,8 @@ const Signin = () => {
     </div>
   )
 }
-export default Signin;
+
+
+const mapStateToProps=({user})=>({user})
+
+export default connect(mapStateToProps, {})(Signin);
