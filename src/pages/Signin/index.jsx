@@ -6,7 +6,7 @@ import GitHubLink from '../../components/GitHubLink'
 import { userSign } from '../../api/user'
 import './index.less'
 import { Response } from '../../model/Response'
-import { setJWTToken } from '../../util/utils'
+import { setLocalStorageItems } from '../../util/utils'
 
 const layout = {
   labelCol: 8,
@@ -17,9 +17,15 @@ const Signin = ({}) => {
   const history = useHistory();
   const onFinish = async (values) => {
     try {
-      const response = new Response(await userSign(values));
-      if (response?.data?.code && response?.data?.jwtToken) {
-        setJWTToken(response.data.jwtToken)
+      const result = await userSign(values);
+      const response = new Response(result.data);
+      if (response?.code && response?.jwtToken) {
+        // localstorage添加内容
+        setLocalStorageItems({
+          jwtToken:response.jwtToken, // token
+          userId:response.data.id, // 用户id
+          userName:response.data.username //用户名称
+        })
         history.push('/')
         message.success('登录成功')
       } else {
@@ -60,4 +66,5 @@ const Signin = ({}) => {
 
 const mapStateToProps=({user})=>({user})
 
-export default connect(mapStateToProps, {})(Signin);
+export default Signin;
+// export default connect(mapStateToProps, {})(Signin);

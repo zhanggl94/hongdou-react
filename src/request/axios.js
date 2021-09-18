@@ -29,6 +29,9 @@ axios.interceptors.response.use(res => {
 }, error => {
     hideLoading();
     const { response } = error;
+    if(!response){
+      message.error(error.message)
+    }
     if (response.status !== 200) {
         handleError(response.status, response.data.message)
     }

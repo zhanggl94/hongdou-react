@@ -5,7 +5,7 @@ import GitHubLink from '../../components/GitHubLink'
 import { userSign } from '../../api/user'
 import './index.less'
 import { Response } from '../../model/Response'
-import { setJWTToken } from '../../util/utils'
+// import { setJWTToken } from '../../util/utils'
 
 const layout = {
   labelCol: 8,
@@ -21,7 +21,7 @@ const Signup = () => {
       const response = new Response(await userSign(values));
       console.log('response', response)
       if (response?.data?.code && response?.data?.jwtToken) {
-        setJWTToken(response.data.jwtToken)
+        // setJWTToken(response.data.jwtToken)
         history.push('/')
       } else {
 
