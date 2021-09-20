@@ -3,9 +3,9 @@ import { useHistory } from 'react-router-dom'
 import { Menu, Dropdown } from 'antd'
 import { DownOutlined } from '@ant-design/icons'
 import './index.less'
-import IconFont from '../../../components/IconFont'
-import GitHubLink from '../../../components/GitHubLink'
-import { getLocalStorageItem, removeLocalStorageItems } from '../../../util/utils'
+import IconFont from '../../components/IconFont'
+import GitHubLink from '../../components/GitHubLink'
+import { getLocalStorageItem, removeLocalStorageItems } from '../../util/utils'
 
 // 获取用户名
 const userName = getLocalStorageItem('userName')
@@ -30,7 +30,7 @@ export default function Header() {
   return (
     <div className="header">
       <div className="header-left">
-        <IconFont className="logo" type="icon-hd-hongdou" />
+        
       </div>
       <div className="header-right">
         <div className="header-right-content">

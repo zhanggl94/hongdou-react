@@ -1,11 +1,11 @@
-import MainContent from '../../MainContent'
+import MainContent from '../MainContent'
 import React from 'react'
-import MainNav from '../../MainNav'
+import MainTags from '../MainTags'
 
 export default function Main() {
   return (
     <div>
-      <MainNav />
+      <MainTags />
       <MainContent />
     </div>
   )

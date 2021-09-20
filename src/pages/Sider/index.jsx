@@ -2,7 +2,7 @@ import { Menu } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import './index.less'
-import IconFont from '../../../components/IconFont'
+import IconFont from '../../components/IconFont'
 import menuList from './menuList'
 
 const { SubMenu } = Menu;
@@ -46,8 +46,12 @@ export default function Sider() {
   }, [])
 
   return (
-    <div>
-      <Menu mode="inline" onClick={handleMenuItemClick}>
+    <div className="left-sider">
+      <div className="title">
+        <IconFont className="title-logo" type="icon-hd-hongdou" />
+        <span className="title-word">HongDou</span>
+      </div>
+      <Menu  mode="inline" onClick={handleMenuItemClick}>
         {menus}
       </Menu>
     </div>
