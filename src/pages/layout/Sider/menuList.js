@@ -7,19 +7,19 @@ const menuList = [
     children: [
       {
         type: 'item',
-        key: 'billtype',
+        key: '/home/billtype',
         title: '账单类型',
         icon: 'icon-hd-billtype'
       },
       {
         type: 'item',
-        key: 'paytype',
+        key: '/home/paytype',
         title: '支付类型',
         icon: 'icon-hd-paytype'
       },
       {
         type: 'item',
-        key: 'carbill',
+        key: '/home/carbill',
         title: '汽车账单',
         icon: 'icon-hd-carbill',
       }

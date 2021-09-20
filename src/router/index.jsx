@@ -1,13 +1,15 @@
 import Signin from '../pages/Signin'
 import Signup from '../pages/Signup'
 import Home from '../pages/Home'
+import BillType from '../pages/BillType'
+import PayType from '../pages/PayType'
 import NotFound from '../pages/NotFound'
 import { Redirect } from 'react-router';
 
 // 配置重定向页面到404
 const redirectToNotFound = () => <Redirect to='/notfound' />
 
-export const routes = [
+export const commonRoutes = [
   {
     path: '/signin',
     component: Signin,
@@ -36,3 +38,14 @@ export const routes = [
     component: redirectToNotFound,
   }
 ];
+
+export const mainRoutes=[
+  {
+    path:'/home/billtype',
+    component:BillType,
+  },
+  {
+    path:'/home/paytype',
+    component:PayType,
+  },
+]

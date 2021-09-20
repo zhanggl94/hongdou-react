@@ -1,11 +1,13 @@
 import { Menu } from 'antd'
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import './index.less'
 import IconFont from '../../../components/IconFont'
 import menuList from './menuList'
 
 const { SubMenu } = Menu;
 
+// 初始化左侧菜单
 const initMenu = menuList => {
   return (
     menuList.map(item => {
@@ -23,22 +25,29 @@ const initMenu = menuList => {
         )
       } else {
         return (
-          <Menu.Item key={item.key} icon={<IconFont className="sider-icon" type={item.icon} />}>{item.title}</Menu.Item>
+          <Menu.Item key={item.key} icon={<IconFont className="sider-icon" onClick={handleMenuItemClick} type={item.icon} />}>
+            <Link to={item.key} replace>{item.title}</Link>
+          </Menu.Item>
         )
       }
     })
   )
 }
 
+const handleMenuItemClick = (item) => {
+  console.log('===========', item)
+}
+
 export default function Sider() {
-  console.log('menuList:', menuList)
+  // 初始化菜单列表
   const [menus, setMenus] = useState([]);
   useEffect(() => {
     setMenus(initMenu(menuList))
   }, [])
+
   return (
     <div>
-      <Menu mode="inline">
+      <Menu mode="inline" onClick={handleMenuItemClick}>
         {menus}
       </Menu>
     </div>

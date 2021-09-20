@@ -2,7 +2,7 @@ import React from 'react'
 import './index.less'
 import Header from '../layout/Header'
 import Sider from '../layout/Sider'
-import MainNav from '../layout/MainNav'
+import MainNav from '../MainNav'
 import Main from '../layout/Main'
 
 export default function index() {
@@ -15,7 +15,6 @@ export default function index() {
         <Sider/>
       </div>
       <main className="main-continer">
-        <MainNav/>
         <Main/>
       </main>
       <footer className="footer-container" style={{ backgroundColor: 'yellow' }}>footer</footer>
