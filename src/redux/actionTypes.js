@@ -1,2 +1,2 @@
-export const USER_SIGNIN ='USER_SIGNIN';
-export const USER_SIGNUP ='USER_SIGNUP';
+// 左侧菜单折叠状态
+export const TOGGLE_COLLAPSE = 'TOGGLE_COLLAPSE';

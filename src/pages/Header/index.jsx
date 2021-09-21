@@ -26,11 +26,13 @@ export default function Header() {
       <Menu.Item key="signout" onClick={logout}>退出</Menu.Item>
     </Menu>
   )
+  // console.log('store', store)
+  // const collapseIcon = store.leftSider.collapse ? <IconFont className="icon-font20" type="icon-hd-collapse-left" /> : <IconFont className="icon-font20" type="icon-hd-collapse-right" />
 
   return (
     <div className="header">
       <div className="header-left">
-        
+        {/* {collapseIcon} */}
       </div>
       <div className="header-right">
         <div className="header-right-content">
