@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import './index.less'
 import IconFont from '../../components/IconFont'
 import menuList from './menuList'
+import { addMainTag } from '../../redux/actions/mainTags'
 
 const { SubMenu } = Menu;
 
@@ -59,5 +60,7 @@ function Sider(props) {
   )
 }
 
-export default connect(({ leftSider }) => ({ collapse: leftSider.collapse }),
-  null)(Sider)
+export default connect(({ leftSider, mainTags }) => ({
+  collapse: leftSider.collapse,
+  mainTags
+}), { addMainTag })(Sider)
