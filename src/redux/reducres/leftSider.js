@@ -4,11 +4,11 @@ const initState = {
   collapse: false
 }
 
-
+// 左侧菜单reducer
 const leftSide = (state = initState, action) => {
   switch (action.type) {
     case TOGGLE_COLLAPSE: // 切换左侧菜单折叠状态
-      return { ...initState, collapse: !initState.collapse }
+      return { ...initState, collapse: !state.collapse }
     default:
       return state;
   }

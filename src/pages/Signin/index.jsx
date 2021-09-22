@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import { connect } from 'react-redux'
 import { Button, Form, Input, message } from 'antd'
 import GitHubLink from '../../components/GitHubLink'
 import { userSign } from '../../api/user'
@@ -13,7 +12,7 @@ const layout = {
   wrapperCol: 10
 }
 
-const Signin = ({}) => {
+const Signin = () => {
   const history = useHistory();
   const onFinish = async (values) => {
     try {
@@ -63,8 +62,4 @@ const Signin = ({}) => {
   )
 }
 
-
-const mapStateToProps=({user})=>({user})
-
 export default Signin;
-// export default connect(mapStateToProps, {})(Signin);

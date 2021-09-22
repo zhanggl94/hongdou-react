@@ -1,18 +1,19 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
-import { Menu, Dropdown } from 'antd'
+import { connect } from 'react-redux'
+import { Menu, Dropdown, Button } from 'antd'
 import { DownOutlined } from '@ant-design/icons'
 import './index.less'
 import IconFont from '../../components/IconFont'
 import GitHubLink from '../../components/GitHubLink'
 import { getLocalStorageItem, removeLocalStorageItems } from '../../util/utils'
+import { toggleCollapse } from '../../redux/actions/leftSider'
 
 // 获取用户名
 const userName = getLocalStorageItem('userName')
 
-
-
-export default function Header() {
+function Header(props) {
+  console.log('==============', props)
   const history = useHistory();
   // 退出事件
   const logout = () => {
@@ -26,13 +27,19 @@ export default function Header() {
       <Menu.Item key="signout" onClick={logout}>退出</Menu.Item>
     </Menu>
   )
-  // console.log('store', store)
-  // const collapseIcon = store.leftSider.collapse ? <IconFont className="icon-font20" type="icon-hd-collapse-left" /> : <IconFont className="icon-font20" type="icon-hd-collapse-right" />
+
+  const collapseIcon = props.collapse ?
+    <Button type="link" onClick={props.toggleCollapse}>
+      <IconFont className="icon-font20" type="icon-hd-collapse-right" />
+    </Button> :
+    <Button type="link" onClick={props.toggleCollapse}>
+      <IconFont className="icon-font20" type="icon-hd-collapse-left" />
+    </Button >
 
   return (
     <div className="header">
       <div className="header-left">
-        {/* {collapseIcon} */}
+        {collapseIcon}
       </div>
       <div className="header-right">
         <div className="header-right-content">
@@ -49,3 +56,7 @@ export default function Header() {
     </div>
   )
 }
+
+export default connect(state => ({
+  collapse: state.leftSider.collapse,
+}), { toggleCollapse })(Header);

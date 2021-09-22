@@ -1,5 +1,6 @@
 import { Menu } from 'antd'
 import React, { useEffect, useState } from 'react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import './index.less'
 import IconFont from '../../components/IconFont'
@@ -38,7 +39,7 @@ const handleMenuItemClick = (item) => {
   console.log('===========', item)
 }
 
-export default function Sider() {
+function Sider(props) {
   // 初始化菜单列表
   const [menus, setMenus] = useState([]);
   useEffect(() => {
@@ -46,14 +47,17 @@ export default function Sider() {
   }, [])
 
   return (
-    <div className="left-sider">
+    <div className={props.collapse ? "left-sider" : "left-sider left-sider-extend"}>
       <div className="title">
         <IconFont className="title-logo" type="icon-hd-hongdou" />
-        <span className="title-word">HongDou</span>
+        <span className={props.collapse ? "title-word-hide" : "title-word"}>HongDou</span>
       </div>
-      <Menu  mode="inline" onClick={handleMenuItemClick}>
+      <Menu mode="inline" onClick={handleMenuItemClick} inlineCollapsed={props.collapse}>
         {menus}
       </Menu>
     </div>
   )
 }
+
+export default connect(({ leftSider }) => ({ collapse: leftSider.collapse }),
+  null)(Sider)
