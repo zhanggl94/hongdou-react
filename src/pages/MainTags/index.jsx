@@ -1,12 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import MainTag from '../MainTag'
+import './index.less'
 
-function MainTags() {
+function MainTags({ mainTags }) {
   return (
-    <div>
-      <h2>MainTags</h2>
+    <div className="main-tags">
+      {mainTags.map(item => (<MainTag tag={item} key={item.path} />))}
     </div>
   )
 }
 
-export default connect(null, null)(MainTags)
+export default connect(({ mainTags }) => ({ mainTags }), null)(MainTags)

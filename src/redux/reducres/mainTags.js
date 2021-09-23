@@ -4,9 +4,14 @@ const initState = []
 const mainTags = (state = initState, action) => {
     switch (action.type) {
         case ADD_MAINTAG:
-            return initState;
+            return [...state, action.data];
         case REMOVE_MAINTAG:
-            return initState;
+            return state.reduce((pre, curr) => {
+                if (curr.path !== action.data.path) {
+                    pre.push(curr);
+                }
+                return pre
+            }, [])
         default:
             return state;
     }

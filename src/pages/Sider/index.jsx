@@ -1,7 +1,7 @@
 import { Menu } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import './index.less'
 import IconFont from '../../components/IconFont'
 import menuList from './menuList'
@@ -27,8 +27,8 @@ const initMenu = menuList => {
         )
       } else {
         return (
-          <Menu.Item key={item.key} icon={<IconFont className="sider-icon" onClick={handleMenuItemClick} type={item.icon} />}>
-            <Link to={item.key} replace>{item.title}</Link>
+          <Menu.Item key={item.key} icon={<IconFont className="sider-icon" type={item.icon} />}>
+            <Link to={item.key}>{item.title}</Link>
           </Menu.Item>
         )
       }
@@ -36,11 +36,18 @@ const initMenu = menuList => {
   )
 }
 
-const handleMenuItemClick = (item) => {
-  console.log('===========', item)
+const handleMenuItemClick = (mainTags, addMainTag, item) => {
+  const tag = {
+    title: item.domEvent.target.innerHTML,
+    path: item.key
+  }
+  if (!mainTags.some(t => t.path === item.key)) {
+    addMainTag(tag);
+  }
 }
 
-function Sider(props) {
+function Sider({ collapse, mainTags, addMainTag }) {
+  const { pathname } = useLocation();
   // 初始化菜单列表
   const [menus, setMenus] = useState([]);
   useEffect(() => {
@@ -48,12 +55,12 @@ function Sider(props) {
   }, [])
 
   return (
-    <div className={props.collapse ? "left-sider" : "left-sider left-sider-extend"}>
+    <div className={collapse ? "left-sider" : "left-sider left-sider-extend"}>
       <div className="title">
         <IconFont className="title-logo" type="icon-hd-hongdou" />
-        <span className={props.collapse ? "title-word-hide" : "title-word"}>HongDou</span>
+        <span className={collapse ? "title-word-hide" : "title-word"}>HongDou</span>
       </div>
-      <Menu mode="inline" onClick={handleMenuItemClick} inlineCollapsed={props.collapse}>
+      <Menu mode="inline" onClick={handleMenuItemClick.bind(this, mainTags, addMainTag)} selectedKeys={[pathname]} inlineCollapsed={collapse}>
         {menus}
       </Menu>
     </div>
