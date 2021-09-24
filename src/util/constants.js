@@ -1,6 +1,4 @@
 const constants = {
-    jwtToken: 'jwtToken',
-    username:'username',
-    userid:'userid'
+    pageSizeDefault: 10, // 分页的默认条数
 }
 export default constants;

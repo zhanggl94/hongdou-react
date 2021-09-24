@@ -2,6 +2,7 @@ import axios from 'axios'
 import { Spin, message } from 'antd'
 import ReactDOM from 'react-dom'
 import baseUrl from '../api/baseUrl'
+import { getLocalStorageItem } from '../util/utils'
 
 axios.defaults.baseURL = 'http://localhost:3001/api/'
 axios.defaults.timeout = 2000 * 10; // 超时时间
@@ -13,7 +14,7 @@ let requestCount = 0; // 计数器
 axios.interceptors.request.use(config => {
     showLoading();
     if (!config.url.endsWith(baseUrl.signin) && !config.url.endsWith(baseUrl.signup)) {
-        // axios.defaults.headers['jwttoken'] = '';
+        config.headers['jwttoken'] = getLocalStorageItem('jwtToken') // Token
     }
     return config;
 }, error => {
@@ -23,14 +24,13 @@ axios.interceptors.request.use(config => {
 
 // 响应拦截器
 axios.interceptors.response.use(res => {
-    console.log('axios res: ', res)
     hideLoading();
     return Promise.resolve(res)
 }, error => {
     hideLoading();
     const { response } = error;
-    if(!response){
-      message.error(error.message)
+    if (!response) {
+        message.error(error.message)
     }
     if (response.status !== 200) {
         handleError(response.status, response.data.message)

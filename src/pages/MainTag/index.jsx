@@ -15,7 +15,6 @@ function MainTag({ tag, removeMainTag }) {
         } else {
             setClassName('main-tag');
         }
-        console.log('tagClassName: ', tagClassName)
     }, [pathname, tag.path, tagClassName])
 
     return (
