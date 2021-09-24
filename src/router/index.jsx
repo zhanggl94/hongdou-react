@@ -9,7 +9,7 @@ import { Redirect } from 'react-router';
 // 配置重定向页面到404
 const redirectToNotFound = () => <Redirect to='/notfound' />
 
-const redirectToContentNotFound = () => <Redirect to='/home/notfound' />
+const redirectToContentNotFound = () => <Redirect to='/hongdou/notfound' />
 
 export const commonRoutes = [
   {
@@ -28,7 +28,7 @@ export const commonRoutes = [
     exact: true,
   },
   {
-    path: '/home',
+    path: '/hongdou',
     component: Home,
   },
   {
@@ -43,19 +43,19 @@ export const commonRoutes = [
 
 export const mainRoutes = [
   {
-    path: '/home/billtype',
+    path: '/hongdou/billtype',
     component: BillType,
   },
   {
-    path: '/home/paytype',
+    path: '/hongdou/paytype',
     component: PayType,
   },
   {
-    path: '/home/notfound',
+    path: '/hongdou/notfound',
     component: NotFound,
   },
   {
-    path: '/home/*',
+    path: '/hongdou/*',
     component: redirectToContentNotFound,
   }
 ]
