@@ -7,10 +7,10 @@ import { Button, Space } from 'antd'
 import IconFont from '../../components/IconFont'
 
 // 获取账单类型列表
-const getBillTypeInfo = async () => {
+const getBillTypeInfo = async (pageInfo) => {
   let billTypeInfo = [];
   try {
-    const result = await billTypeAPI.select({ pageIndex: 1, pageSize: constants.pageSizeDefault });
+    const result = await billTypeAPI.select(pageInfo);
     if (result.data.code) {
       billTypeInfo = result.data.data;
     }
@@ -50,26 +50,35 @@ const columns = [
 
 export default function BillType() {
 
+  // 分页切换时的事件
+  const pageSizeChange = (page, pageSize) => {
+    console.log(`PageSizeChange: page:${page}, pageSize:${pageSize}`)
+    getBillTypeInfo({ pageIndex: page, pageSize }).then(data => {
+      setbillTypeInfo(data);
+    })
+  }
+
   // 账单类型
   const [billTypeInfo, setbillTypeInfo] = useState([])
 
   // 初始化账单列表
   useEffect(() => {
-    getBillTypeInfo().then((data) => {
+    getBillTypeInfo({ pageIndex: 1, pageSize: constants.pageSizeDefault }).then((data) => {
       setbillTypeInfo(data);
     })
   }, []);
-  
+
   const pagination = {
-    total:billTypeInfo.total,
-    hideOnSinglePage:true,
-    pageSize:constants.pageSizeDefault,
-    defaultPageSize:constants.pageSizeDefault,
+    total: billTypeInfo.total,
+    hideOnSinglePage: true,
+    pageSize: constants.pageSizeDefault,
+    defaultPageSize: constants.pageSizeDefault,
+    onChange: pageSizeChange,
   }
 
   return (
     <div>
-      <CommonTable size="middle" columns={columns} dataSource={billTypeInfo.list} pagination={pagination}/>
+      <CommonTable size="middle" onChange={pageSizeChange} columns={columns} dataSource={billTypeInfo.list} pagination={pagination} />
     </div>
   )
 }
