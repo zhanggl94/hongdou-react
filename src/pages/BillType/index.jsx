@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
+import { message } from 'antd'
 import './index.less'
 import billTypeAPI from '../../api/billType'
 import constants from '../../util/constants'
 import CommonTable from '../../components/Table'
-import { Button, Space } from 'antd'
-import IconFont from '../../components/IconFont'
+import TableOperateButton from '../../components/TableOperateButton'
 
 // 获取账单类型列表
 const getBillTypeInfo = async (pageInfo) => {
@@ -21,7 +21,33 @@ const getBillTypeInfo = async (pageInfo) => {
   return billTypeInfo;
 }
 
+// 编辑账单类型
+const editBillType = () => {
+  console.log('edit bill type')
+}
 
+// 删除账单类型
+const deleteBillType = async idList => {
+  console.log('删除')
+  try {
+    const result = await billTypeAPI.delete({ idList });
+    if (result.data.code) {
+      message.success('删除成功')
+
+    } else {
+      message.warning(result.data.message ? result.data.message : '删除出现错误')
+    }
+  } catch (error) {
+    console.log('There has some error: ', error)
+  }
+}
+
+// 删除单个账单类型
+const deleteSingleBillType = async record => {
+  await deleteBillType([record.id])
+}
+
+// Table列信息
 const columns = [
   {
     title: '类型',
@@ -39,11 +65,8 @@ const columns = [
     dataIndex: 'action',
     align: 'center',
     width: 200,
-    render: () => (
-      <Space>
-        <Button type="link" icon={<IconFont className="bill-type-action-icon" type="icon-hd-edit-circle" />} />
-        <Button type="link" icon={<IconFont className="bill-type-action-icon" type="icon-hd-delete-circle" />} />
-      </Space>
+    render: (_, record) => (
+      <TableOperateButton handleEdit={editBillType} handleDelete={() => deleteSingleBillType(record)} />
     ),
   }
 ]
@@ -51,11 +74,10 @@ const columns = [
 export default function BillType() {
 
   // 分页切换时的事件
-  const pageSizeChange = (page, pageSize) => {
+  const pageSizeChange = async (page, pageSize) => {
     console.log(`PageSizeChange: page:${page}, pageSize:${pageSize}`)
-    getBillTypeInfo({ pageIndex: page, pageSize }).then(data => {
-      setbillTypeInfo(data);
-    })
+    const data = await getBillTypeInfo({ pageIndex: page, pageSize });
+    setbillTypeInfo(data);
   }
 
   // 账单类型
